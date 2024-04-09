@@ -23,6 +23,7 @@ function createCards(city) {
     let wind = city.list[i].wind.speed;
 
     let cardBodyEl = document.createElement(`div`);
+    cardBodyEl.classList = `flex-column justify-space-between align-center`;
 
     let cityNameEl = document.createElement(`span`);
     cityNameEl.textContent = name + date;
