@@ -5,6 +5,7 @@ const submitEl = document.getElementById(`submit-button`);
 const cardContainer = document.getElementById(`card-container`);
 const cardContainerMainEl = document.getElementById(`card-container-today`);
 const cardContainerFiveDayEl = document.getElementById(`card-container-five-day`);
+const savedCities = document.getElementById(`saved-cities`);
 const cardLimit = 6;
 
 function capitaliseLetter(string) {
@@ -18,9 +19,9 @@ function saveCity(city) {
 function createCards(city) {
   let cardCreated = 0;
   let previousDate = '';
+  let name = city.city.name;
 
   for(let i = 0; i < city.list.length; i++) {
-    let name = city.city.name;
     let dateUnix = dayjs.unix(city.list[i].dt);
     let currentDate = dayjs(dateUnix).format(`DD/MM/YYYY`);
 
@@ -32,6 +33,7 @@ function createCards(city) {
     if(currentDate !== previousDate) {
       //create only up to cardlimit (6) cards
       if(cardCreated < cardLimit) {
+        //creating a weather card
         let cardBodyEl = document.createElement(`div`);
         cardBodyEl.classList = `flex-column justify-space-between align-center`;
     
@@ -68,7 +70,7 @@ function createCards(city) {
         //created cards counter
         cardCreated++;
       }
-      
+
       //set the current date to the previous date variable
       previousDate = currentDate;
 
@@ -78,6 +80,11 @@ function createCards(city) {
       //   console.log(`it matches`);
     }
   }
+  //creating a button
+  let cityButton = document.createElement(`button`);
+  cityButton.textContent = name;
+  cityButton.classList = `d-block p-2`;
+  savedCities.appendChild(cityButton);
 }
 
 function getInfo(city) {
