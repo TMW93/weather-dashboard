@@ -8,12 +8,25 @@ const cardContainerFiveDayEl = document.getElementById(`card-container-five-day`
 const savedCities = document.getElementById(`saved-cities`);
 const cardLimit = 6;
 
+let cities = JSON.parse(localStorage.getItem(`cities`));
+if(cities === null) {
+  cities = [];
+}
+
 function capitaliseLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function saveCity(city) {
   localStorage.setItem(`cities`, JSON.stringify(city));
+}
+
+function createButtons(cities) {
+  let cityButton = document.createElement(`button`);
+  cityButton.textContent = cities;
+  cityButton.classList = `d-block p-2`;
+  savedCities.appendChild(cityButton);
+  // console.log(cityButton.textContent);
 }
 
 function createCards(city) {
@@ -80,11 +93,9 @@ function createCards(city) {
       //   console.log(`it matches`);
     }
   }
-  //creating a button
-  let cityButton = document.createElement(`button`);
-  cityButton.textContent = name;
-  cityButton.classList = `d-block p-2`;
-  savedCities.appendChild(cityButton);
+
+  //push new name onto array
+  saveCity(name);
 }
 
 function getInfo(city) {
@@ -93,9 +104,8 @@ function getInfo(city) {
     .then(function(response) {
       if(response.ok) {
         response.json().then(function(data) {
-          console.log(data);
+          // console.log(data);
           createCards(data);
-          // console.log(data.list.length);
         });
       } else {
         alert(`Error: ${response.statusText}`);
@@ -116,13 +126,22 @@ formEl.addEventListener(`submit`, function(event) {
     //API is case sensitive, so checking if input starts with an uppercase
     if(city[0] === city[0].toLowerCase()) {
       city = capitaliseLetter(city);
-      saveCity(city);
     }
     inputEl.value = ``;
-    let cityInfo = getInfo(city);
-    console.log(cityInfo);
+    getInfo(city);
+    createButtons(city);
   } else {
     alert(`enter something`);
   }
 
+});
+
+$(document).ready(function() {
+  console.log(`document ready`);
+
+  if(cities != null) {
+    for(let i = 0; i < cities.length; i++) {
+      createButtons(cities[i]);
+    }
+  }
 });
