@@ -1,8 +1,11 @@
+const APIKey = `d9f7ae52bdcbdea7747b2ed5150396ce`;
 const formEl = document.getElementById(`search-form`);
 const inputEl = document.getElementById(`city-input`);
 const submitEl = document.getElementById(`submit-button`);
-const cardContainerEl = document.getElementById(`card-container`);
-const maxDays = 5;
+const cardContainer = document.getElementById(`card-container`);
+const cardContainerMainEl = document.getElementById(`card-container-today`);
+const cardContainerFiveDayEl = document.getElementById(`card-container-five-day`);
+const maxDays = 6;
 
 function capitaliseLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -26,27 +29,39 @@ function createCards(city) {
     cardBodyEl.classList = `flex-column justify-space-between align-center`;
 
     let cityNameEl = document.createElement(`span`);
-    cityNameEl.textContent = name + date;
+    cityNameEl.textContent = name + ` (` + date + `)`;
+    cityNameEl.classList = `d-block p-2`;
     cardBodyEl.appendChild(cityNameEl);
   
     let cityTempEl = document.createElement(`span`);
     cityTempEl.textContent = `Temperature: ` + temp;
+    cityTempEl.classList = `d-block p-2`;
     cardBodyEl.appendChild(cityTempEl);
   
     let cityWindEl = document.createElement(`span`);
     cityWindEl.textContent = `Wind: ` + wind;
+    cityWindEl.classList = `d-block p-2`;
     cardBodyEl.appendChild(cityWindEl);
   
     let cityHumidityEl = document.createElement(`span`); 
     cityHumidityEl.textContent = `Humidity: ` + humidity;
+    cityHumidityEl.classList = `d-block p-2`;
     cardBodyEl.appendChild(cityHumidityEl);
   
-    cardContainerEl.appendChild(cardBodyEl);
+    if(i === 0) {
+      cardContainerMainEl.appendChild(cardBodyEl);
+      let fiveDayTitle = document.createElement(`h3`);
+      fiveDayTitle.textContent = `5 Day Forecast`;
+      cardContainerFiveDayEl.appendChild(fiveDayTitle);
+    } else {
+      cardBodyEl.classList = `d-inline-block`;
+      cardContainerFiveDayEl.appendChild(cardBodyEl);
+    }
   }
 }
 
 function getInfo(city) {
-  const apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=d9f7ae52bdcbdea7747b2ed5150396ce`;
+  const apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}`;
   fetch(apiUrl)
     .then(function(response) {
       if(response.ok) {
@@ -82,4 +97,4 @@ formEl.addEventListener(`submit`, function(event) {
     alert(`enter something`);
   }
 
-})
+});
