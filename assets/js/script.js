@@ -29,7 +29,7 @@ function createButtons(cities) {
   let cityButton = document.createElement(`button`);
   // cityButton.setAttribute(`id`, buttonId);
   cityButton.textContent = cities;
-  cityButton.classList = `city-button d-block p-2`;
+  cityButton.classList = `city-button d-block p-1 mb-3 w-75`;
   cityButton.setAttribute(`type`, `button`);
   savedCities.appendChild(cityButton);
   // console.log(cityButton.textContent);

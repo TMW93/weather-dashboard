@@ -11,26 +11,35 @@
 </head>
 
 <body class="flex-column min-100-vh">
-  <header class="p-3">
-    <h1 class="text-center">Weather DashBoard</h1>
-  </header>
-  <main class="row justify-space-between align-items-center">
-    <div class="col-12 col-md-3">
-      <div class="col-12 p-4">
-        <form id="search-form">
-          <label class="form-label mb-3">Search For a City</label>
-          <input class="form-input d-block mb-3 w-100" type="text" id="city-input">
-          <button type="submit" class="d-block w-100" id="submit-button">Search</button>
-        </form>
-      </div>
-  
-      <div id="saved-cities"></div>
+  <div class="container">
+    <div class="row">
+      <header class="p-3">
+        <h1 class="text-center">Weather DashBoard</h1>
+      </header>
     </div>
+  </div>
 
-    <section class="col-12 col-md-9" id="card-container">
-      <div id="card-container-today"></div>
-      <div class="flex-row" id="card-container-five-day"></div>
+  <main class="container">
+    <section class="row">
+      <div class="col-12 col-lg-4">
+        <div>
+          <form class="row-align-start mb-5" id="search-form">
+            <label class="form-label mb-3">Search For a City</label>
+            <input class="form-input d-block mb-3 w-100" type="text" id="city-input">
+            <button type="submit" class="d-block w-100" id="submit-button">Search</button>
+          </form>
+        </div>
+        <div class="align-items-center" id="saved-cities"></div>
+      </div>
+
+      <div class="row col-12 col-lg-8" id="card-container">
+        <div>
+          <div id="card-container-today"></div>
+          <div class="flex-row" id="card-container-five-day"></div>
+        </div>
+      </div>
     </section>
+
 
     
   </main>
