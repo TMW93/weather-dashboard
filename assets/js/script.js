@@ -93,9 +93,6 @@ function createCards(city) {
       //   console.log(`it matches`);
     }
   }
-
-  //push new name onto array
-  saveCity(name);
 }
 
 function getInfo(city) {
@@ -104,7 +101,9 @@ function getInfo(city) {
     .then(function(response) {
       if(response.ok) {
         response.json().then(function(data) {
-          // console.log(data);
+          //save city name
+          cities.push(data.city.name);
+          saveCity(cities);
           createCards(data);
         });
       } else {
