@@ -5,8 +5,9 @@ const submitEl = document.getElementById(`submit-button`);
 const cardContainer = document.getElementById(`card-container`);
 const cardContainerMainEl = document.getElementById(`card-container-today`);
 const cardContainerFiveDayEl = document.getElementById(`card-container-five-day`);
-const savedCities = document.getElementById(`saved-cities`);
-const cityButtons = document.getElementsByClassName(`city-button`);
+const savedCitiesEl = document.getElementById(`saved-cities`);
+const cityBtnEl = document.getElementsByClassName(`city-button`);
+const clearBtnEl = document.getElementById(`clear-button`);
 
 const cardLimit = 6;
 
@@ -24,15 +25,11 @@ function saveCity(city) {
 }
 
 function createButtons(cities) {
-  // let buttonId = generateButtonId();
-  // console.log(buttonId);
   let cityButton = document.createElement(`button`);
-  // cityButton.setAttribute(`id`, buttonId);
   cityButton.textContent = cities;
   cityButton.classList = `city-button d-block p-1 mb-3 w-100 btn btn-secondary`;
   cityButton.setAttribute(`type`, `button`);
-  savedCities.appendChild(cityButton);
-  // console.log(cityButton.textContent);
+  savedCitiesEl.appendChild(cityButton);
 }
 
 function createCards(city) {
@@ -105,7 +102,6 @@ function createCards(city) {
           fiveDayTitle.classList = `p-3 mt-5`;
           cardContainerFiveDayEl.appendChild(fiveDayTitle);
         } else {
-          // cardBodyEl.classList = `d-inline-block`;
           cardEl.appendChild(cardBodyEl);
           cardContainerFiveDayEl.appendChild(cardEl);
         }
@@ -172,12 +168,16 @@ function clearCards() {
       let length = cardContainerFiveDayEl.childNodes.length;
       for(let i = 0; i < length; i++) {
         cardContainerFiveDayEl.firstElementChild.remove();
-        // console.log(cardContainerFiveDayEl.children.length);
-        // console.log(cardContainerFiveDayEl.children);
       }
     }
   }
 
+}
+
+function clearData() {
+  cities = [];
+  saveCity(cities);
+  location.reload();
 }
 
 
@@ -187,15 +187,13 @@ $(document).ready(function() {
   if(cities != null) {
     for(let i = 0; i < cities.length; i++) {
       createButtons(cities[i]);
-      cityButtons[i].addEventListener(`click`, function(event) {
+      cityBtnEl[i].addEventListener(`click`, function(event) {
         // console.log(event.target.textContent);
         clearCards();
         getInfo(event.target.textContent);
       });
     }
   }
-
-
 
   formEl.addEventListener(`submit`, function(event) {
     event.preventDefault();
@@ -213,4 +211,9 @@ $(document).ready(function() {
       alert(`enter something`);
     }
   });
+
+  clearBtnEl.addEventListener(`click`, function(event) {
+    clearData();
+  });
+
 });
