@@ -29,13 +29,17 @@ function createButtons(cities) {
   let cityButton = document.createElement(`button`);
   // cityButton.setAttribute(`id`, buttonId);
   cityButton.textContent = cities;
-  cityButton.classList = `city-button d-block p-1 mb-3 w-75`;
+  cityButton.classList = `city-button d-block p-1 mb-3 w-100 btn btn-secondary`;
   cityButton.setAttribute(`type`, `button`);
   savedCities.appendChild(cityButton);
   // console.log(cityButton.textContent);
 }
 
 function createCards(city) {
+
+  let cardEl = document.createElement(`div`);
+  cardEl.classList = `card-deck`;
+
   let cardCreated = 0;
   let previousDate = '';
   let name = city.city.name;
@@ -53,37 +57,44 @@ function createCards(city) {
       //create only up to cardlimit (6) cards
       if(cardCreated < cardLimit) {
         //creating a weather card
+
         let cardBodyEl = document.createElement(`div`);
-        cardBodyEl.classList = `flex-column justify-space-between align-center`;
+        cardBodyEl.classList = `card`;
     
-        let cityNameEl = document.createElement(`span`);
+        let cityNameEl = document.createElement(`div`);
         cityNameEl.textContent = name + ` (` + currentDate + `)`;
-        cityNameEl.classList = `d-block p-2`;
+        cityNameEl.classList = `card-header`;
         cardBodyEl.appendChild(cityNameEl);
       
-        let cityTempEl = document.createElement(`span`);
-        cityTempEl.textContent = `Temperature: ` + temp;
-        cityTempEl.classList = `d-block p-2`;
-        cardBodyEl.appendChild(cityTempEl);
+        let listEl = document.createElement(`ul`);
+        listEl.classList = `list-group list-group-flush`;
+        cardBodyEl.appendChild(listEl);
+
+        let cityTempEl = document.createElement(`li`);
+        cityTempEl.textContent = `Temperature: ` + temp + `°C`;
+        cityTempEl.classList = `list-group-item`;
+        listEl.appendChild(cityTempEl);
       
-        let cityWindEl = document.createElement(`span`);
-        cityWindEl.textContent = `Wind: ` + wind;
-        cityWindEl.classList = `d-block p-2`;
-        cardBodyEl.appendChild(cityWindEl);
+        let cityWindEl = document.createElement(`li`);
+        cityWindEl.textContent = `Wind: ` + wind + `KPH`;
+        cityWindEl.classList = `list-group-item`;
+        listEl.appendChild(cityWindEl);
       
-        let cityHumidityEl = document.createElement(`span`); 
-        cityHumidityEl.textContent = `Humidity: ` + humidity;
-        cityHumidityEl.classList = `d-block p-2`;
-        cardBodyEl.appendChild(cityHumidityEl);
+        let cityHumidityEl = document.createElement(`li`); 
+        cityHumidityEl.textContent = `Humidity: ` + humidity + `%`;
+        cityHumidityEl.classList = `list-group-item`;
+        listEl.appendChild(cityHumidityEl);
       
         if(i === 0) {
           cardContainerMainEl.appendChild(cardBodyEl);
           let fiveDayTitle = document.createElement(`h3`);
           fiveDayTitle.textContent = `5 Day Forecast`;
+          fiveDayTitle.classList = `p-3`;
           cardContainerFiveDayEl.appendChild(fiveDayTitle);
         } else {
-          cardBodyEl.classList = `d-inline-block`;
-          cardContainerFiveDayEl.appendChild(cardBodyEl);
+          // cardBodyEl.classList = `d-inline-block`;
+          cardEl.appendChild(cardBodyEl);
+          cardContainerFiveDayEl.appendChild(cardEl);
         }
 
         //created cards counter
