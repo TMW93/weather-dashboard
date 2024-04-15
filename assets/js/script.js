@@ -207,6 +207,7 @@ $(document).ready(function() {
         city = capitaliseLetter(city);
       }
       inputEl.value = ``;
+      clearCards();
       getInfo(city);
     } else {
       alert(`enter something`);
