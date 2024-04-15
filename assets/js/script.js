@@ -119,7 +119,7 @@ function createCards(city) {
 function getInfo(city) {
   let found = 0;
 
-  const apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`;
   
   fetch(apiUrl)
     .then(function(response) {
