@@ -1,0 +1,19 @@
+body {
+  font-family: monospace, Arial, sans-serif;
+}
+
+#header-container {
+  background-color: rgba(29, 41, 205, 0.477);
+}
+
+h1 {
+  font-size: 55px;
+}
+
+.form-label {
+  font-size: 30px;
+}
+
+.card-header {
+  color: rgba(21, 68, 187, 0.71);
+}

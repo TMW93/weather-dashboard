@@ -65,6 +65,7 @@ function createCards(city) {
         let cityNameEl = document.createElement(`div`);
         cityNameEl.textContent = name + ` (` + currentDate + `)`;
         cityNameEl.classList = `card-header`;
+        cityNameEl.setAttribute(`style`, `font-size: 20px`);
         cardBodyEl.appendChild(cityNameEl);
 
 
@@ -73,6 +74,7 @@ function createCards(city) {
         tempIconEl.setAttribute(`src`, iconURL);
         tempIconEl.setAttribute(`width`, `192px`);
         tempIconEl.setAttribute(`height` , `200px`);
+        tempIconEl.classList = `mx-auto`;
         cardBodyEl.appendChild(tempIconEl);
       
         let listEl = document.createElement(`ul`);
@@ -97,8 +99,8 @@ function createCards(city) {
         if(i === 0) {
           cardContainerMainEl.appendChild(cardBodyEl);
           let fiveDayTitle = document.createElement(`h3`);
-          fiveDayTitle.textContent = `5 Day Forecast`;
-          fiveDayTitle.classList = `p-3`;
+          fiveDayTitle.textContent = `5 Day Forecast:`;
+          fiveDayTitle.classList = `p-3 mt-5`;
           cardContainerFiveDayEl.appendChild(fiveDayTitle);
         } else {
           // cardBodyEl.classList = `d-inline-block`;
