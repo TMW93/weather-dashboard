@@ -51,6 +51,7 @@ function createCards(city) {
     let temp = city.list[i].main.temp;
     let humidity = city.list[i].main.humidity;
     let wind = city.list[i].wind.speed;
+    let icon =  city.list[i].weather[0].icon;
 
     //checking if the date is not the same
     if(currentDate !== previousDate) {
@@ -59,12 +60,20 @@ function createCards(city) {
         //creating a weather card
 
         let cardBodyEl = document.createElement(`div`);
-        cardBodyEl.classList = `card`;
+        cardBodyEl.classList = `card w-75`;
     
         let cityNameEl = document.createElement(`div`);
         cityNameEl.textContent = name + ` (` + currentDate + `)`;
         cityNameEl.classList = `card-header`;
         cardBodyEl.appendChild(cityNameEl);
+
+
+        let tempIconEl = document.createElement(`img`);
+        let iconURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+        tempIconEl.setAttribute(`src`, iconURL);
+        tempIconEl.setAttribute(`width`, `192px`);
+        tempIconEl.setAttribute(`height` , `200px`);
+        cardBodyEl.appendChild(tempIconEl);
       
         let listEl = document.createElement(`ul`);
         listEl.classList = `list-group list-group-flush`;
@@ -116,7 +125,7 @@ function getInfo(city) {
     .then(function(response) {
       if(response.ok) {
         response.json().then(function(data) {
-          // console.log(data);
+          console.log(data);
           //save city name
           for(let i = 0; i < cities.length; i++) {
             if(city === cities[i]) {
